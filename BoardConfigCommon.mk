@@ -29,6 +29,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_CPU_VARIANT := cortex-a9
 TARGET_CPU_SMP := true
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
@@ -88,6 +89,9 @@ USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 BOARD_EGL_CFG := $(LOCAL_PATH)/config/egl.cfg
+
+# Telephony
+BOARD_RIL_CLASS := ../../../device/motorola/msm8960-common/ril/MotorolaQualcommRIL.java
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true

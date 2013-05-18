@@ -46,6 +46,7 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     alsa.msm8960 \
     libalsa-intf \
+    libaudio-resampler \
     libaudioutils \
     aplay \
     amix \
@@ -287,6 +288,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Radio and Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
 	rild.libpath=/system/lib/libril-qc-qmi-1.so \
+	ro.telephony.ril_class=MotorolaQualcommRIL \
 	ril.subscription.types=NV,RUIM \
 	keyguard.no_require_sim=true \
 	ro.use_data_netmgrd=true \
@@ -303,6 +305,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=30
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

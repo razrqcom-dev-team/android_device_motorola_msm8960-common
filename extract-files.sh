@@ -13,7 +13,7 @@ export VENDORDEVICEDIR
 BASE=../../../vendor/$VENDOR/$VENDORDEVICEDIR/proprietary
 rm -rf $BASE/*
 rm -rf $BASE/../packages 2> /dev/null
-for FILE in `cat ../msm8960-common/proprietary-files.txt | grep -v ^# | cut -f1 -d '#' | grep -v ^$`; do
+for FILE in `cat ../msm8960-common/common-proprietary-files.txt | grep -v ^# | cut -f1 -d '#' | grep -v ^$`; do
     DIR=`dirname $FILE`
     if [ ! -d $BASE/$DIR ]; then
         mkdir -p $BASE/$DIR
@@ -24,7 +24,7 @@ for FILE in `cat ../msm8960-common/proprietary-files.txt | grep -v ^# | cut -f1 
         cp -p "$COPY_FROM/$FILE" $BASE/$FILE
     fi
 done
-for FILE in `cat ../${DEVICE}/proprietary-files.txt | grep -v ^# | cut -f1 -d '#' | grep -v ^$`; do
+for FILE in `cat ../${DEVICE}/device-proprietary-files.txt | grep -v ^# | cut -f1 -d '#' | grep -v ^$`; do
     DIR=`dirname $FILE`
     if [ ! -d $BASE/$DIR ]; then
         mkdir -p $BASE/$DIR

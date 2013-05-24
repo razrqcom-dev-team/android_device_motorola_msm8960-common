@@ -105,9 +105,6 @@ on early-boot
     # Need to launch enc_mgt_tool to create device key and signature for vold to set up sd card
     start enc_tool
 
-on boot
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
-
 on fs
     mount_all /fstab.qcom
 
@@ -153,11 +150,6 @@ on post-fs-data
 
 # Set core max size (2G)
    setrlimit 4 2147483648 2147483648
-
-# Setup 160M zram device for swap space
-   write /sys/block/zram0/disksize 167772160
-   exec /system/bin/motobox mkswap /dev/block/zram0
-   exec /system/bin/motobox swapon /dev/block/zram0
 
    # Permissions for battery health daemon
    chown mot_pwric mot_pwric /sys/module/pm8921_bms/parameters/last_real_fcc_batt_temp
@@ -327,6 +319,20 @@ on post-fs-data
 # Create 12m directory that TCMD can write to
     mkdir /data/local/12m 0750 mot_tcmd shell
 
+# Set permissions for evfwd module (webtop)
+    chown system system /sys/devices/platform/evfwdrel/rel
+    chown system system /sys/devices/platform/evfwdkbd/kbd
+    chown system system /sys/devices/platform/evfwdabs/abs
+
+# Perform misc target initialization
+    exec /system/bin/sh /system/bin/init.target.sh
+
+# Start services
+    exec /system/bin/mot_boot_mode
+
+on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
 # Define TCP buffer sizes for ethernet
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.ethernet    131072,262144,524288,4096,16384,131072
@@ -339,10 +345,12 @@ on post-fs-data
     setprop net.tcp.buffersize.hspa    131072,262144,1220608,4096,16384,1220608
     setprop net.tcp.buffersize.hsupa   131072,262144,1220608,4096,16384,1220608
     setprop net.tcp.buffersize.hsdpa   131072,262144,1220608,4096,16384,1220608
+    setprop net.tcp.buffersize.hspap   131072,262144,1572864,4096,16384,1572864
     setprop net.tcp.buffersize.edge    16384,32768,65536,4096,16384,32768
     setprop net.tcp.buffersize.gprs    4096,8192,12288,4096,8192,12288
     setprop net.tcp.buffersize.lte     524288,1048576,4194304,262144,524288,1048576
-    setprop net.tcp.buffersize.evdo_b  131072,262144,524288,4096,16384,262144
+    setprop net.tcp.buffersize.evdo    131072,262144,524288,4096,16384,262144
+    setprop net.tcp.buffersize.evdo_b  131072,262144,704512,4096,16384,262144
     
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
 # Increased technology maximums should be reflected here.
@@ -351,17 +359,6 @@ on post-fs-data
 # NFC settings
     setprop ro.nfc.port "I2C"
 
-
-# Set permissions for evfwd module (webtop)
-    chown system system /sys/devices/platform/evfwdrel/rel
-    chown system system /sys/devices/platform/evfwdkbd/kbd
-    chown system system /sys/devices/platform/evfwdabs/abs
-
-# Perform misc target initialization
-    exec /system/bin/sh /system/bin/init.target.sh
-
-# Start services
-   exec /system/bin/mot_boot_mode
 
 on charger
     trigger early-fs
@@ -390,11 +387,11 @@ on start-charging
    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_itrick
    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_iusb
    chown mot_pwric mot_pwric /sys/devices/platform/msm_ssbi.0/pm8921-core/pm8921-charger/force_chg_usb_suspend
-  start batt_health
-  start whisperd
-  start qcom-post-boot
-  write /sys/devices/system/cpu/cpu1/online 0
-  exec /system/bin/charge_only_mode
+   start batt_health
+   start whisperd
+   start qcom-post-boot
+   write /sys/devices/system/cpu/cpu1/online 0
+   exec /system/bin/charge_only_mode
 
 on property:sys.chargeonly.mode=1
   class_stop core

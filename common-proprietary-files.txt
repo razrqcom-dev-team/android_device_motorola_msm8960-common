@@ -61,11 +61,9 @@ lib/hw/sensors.msm8960.so
 lib/hw/sensors.oem.so
 
 #libs
-lib/libacdbloader.so
 lib/libAKM.so
 lib/libapnjni.so
 lib/libaudcal.so
-lib/libaudioalsa.so
 lib/libbabysit.so
 lib/libbson.so
 lib/libbt-aptx-4.0.4.so
@@ -90,10 +88,8 @@ lib/libidl.so
 lib/libimage-jpeg-enc-omx-comp.so
 lib/libimage-omx-common.so
 lib/libimssettings.so
-lib/libllvm-a3xx.so
 lib/libmm-abl-oem.so
 lib/libmm-abl.so
-lib/libmm-audio-resampler.so
 lib/libmm-color-convertor.so
 lib/libmmjpeg.so
 lib/libmmmpod.so
@@ -110,10 +106,8 @@ lib/libnativedrm1.so
 lib/libnative_renderer.so
 lib/libnetmgr.so
 lib/libNimsWrap.so
-lib/libOmxAacDec.so
 lib/libOmxEvrcDec.so
 lib/libOmxQcelp13Dec.so
-lib/libOmxWmaDec.so
 lib/libopenssl-smime.so
 lib/libqc-opt.so
 lib/libqdi.so
@@ -192,48 +186,66 @@ etc/firmware/vidc.b03
 etc/firmware/vidcfw.elf
 etc/firmware/vidc.mdt
 
-#camera (Must be from ICS ota, last two are not in JB ota at all)
+#camera
 bin/mm-qcamera-daemon
+bin/v4l2-qcamera-app
 lib/libmmcamera_faceproc.so
 lib/libmmcamera_frameproc.so
 lib/libmmcamera_statsproc30.so
 lib/liboemcamera.so
 lib/libtcmdcameraservice.so
+lib/libchromatix_imx074_default_video.so
+lib/libchromatix_imx074_preview.so
+lib/libchromatix_imx074_video_hd.so
+lib/libchromatix_imx074_zsl.so
+lib/libchromatix_imx091_default_video.so
+lib/libchromatix_imx091_preview.so
+lib/libchromatix_imx091_video_hd.so
+lib/libchromatix_ov2720_default_video.so
+lib/libchromatix_ov2720_preview.so
 lib/libchromatix_ov8820_default_video.so
 lib/libchromatix_ov8820_hfr_60fps.so
 lib/libchromatix_ov8820_preview.so
 lib/libchromatix_ov8820_video_hd.so
 lib/libchromatix_ov8820_zsl.so
-lib/libchromatix_s5k4e1_default_video.so
-lib/libchromatix_s5k4e1_preview.so
+lib/libchromatix_s5k3l1yx_default_video.so
+lib/libchromatix_s5k3l1yx_hfr_120fps.so
+lib/libchromatix_s5k3l1yx_hfr_60fps.so
+lib/libchromatix_s5k3l1yx_hfr_90fps.so
+lib/libchromatix_s5k3l1yx_preview.so
+lib/libchromatix_s5k3l1yx_video_hd.so
+lib/libchromatix_s5k3l1yx_zsl.so
 
-# Adreno GPU (Available at QDevNet)
-bin/gpu_dcvsd
-etc/firmware/a225p5_pm4.fw
-etc/firmware/a225_pfp.fw
-etc/firmware/a225_pm4.fw
-etc/firmware/a300_pfp.fw
-etc/firmware/a300_pm4.fw
-etc/firmware/leia_pfp_470.fw
-etc/firmware/leia_pm4_470.fw
-etc/firmware/yamato_pfp.fw
-etc/firmware/yamato_pm4.fw
-lib/egl/eglsubAndroid.so
-lib/egl/libEGL_adreno200.so
-lib/egl/libGLESv1_CM_adreno200.so
-lib/egl/libGLESv2_adreno200.so
-lib/egl/libplayback_adreno200.so
-lib/egl/libq3dtools_adreno200.so
-lib/libc2d2_a3xx.so
-lib/libc2d2_z180.so
-lib/libC2D2.so
-lib/libgsl.so
-lib/libllvm-a3xx.so
-lib/libllvm-arm.so
-lib/libOpenCL.so
-lib/libOpenVG.so
-lib/libsc-a2xx.so
-lib/libsc-a3xx.so
+## Adreno GPU (Available at QDevNet)
+#bin/gpu_dcvsd
+#etc/firmware/a225p5_pm4.fw
+#etc/firmware/a225_pfp.fw
+#etc/firmware/a225_pm4.fw
+#etc/firmware/a300_pfp.fw
+#etc/firmware/a300_pm4.fw
+#etc/firmware/leia_pfp_470.fw
+#etc/firmware/leia_pm4_470.fw
+#etc/firmware/yamato_pfp.fw
+#etc/firmware/yamato_pm4.fw
+#lib/egl/eglsubAndroid.so
+#lib/egl/libEGL_adreno200.so
+#lib/egl/libGLESv1_CM_adreno200.so
+#lib/egl/libGLESv2_adreno200.so
+#lib/egl/libplayback_adreno200.so
+#lib/egl/libq3dtools_adreno200.so
+#lib/libc2d2_a3xx.so
+#lib/libc2d2_z180.so
+#lib/libC2D2.so
+#lib/libgsl.so
+#lib/libllvm-a3xx.so
+#lib/libllvm-arm.so
+#lib/libOpenCL.so
+#lib/libOpenVG.so
+#lib/libsc-a2xx.so
+#lib/libsc-a3xx.so
 
 # GPS (Available on Nexus 4)
 lib/libloc_api_v02.so
+
+# ION audio support (Available on Nexus 4)
+lib/libacdbloader.so

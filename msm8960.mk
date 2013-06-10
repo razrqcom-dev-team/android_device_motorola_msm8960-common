@@ -61,10 +61,7 @@ PRODUCT_PACKAGES += \
 	charge_only_mode \
 	graphicsd \
 	mot_boot_mode \
-	recover_userdata \
-	libwiperjni.so \
-	libxt_native.so \
-	wiperiface
+	libxt_native.so
 
 # Misc
 PRODUCT_PACKAGES += \
@@ -131,16 +128,18 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/root/init.msm.rc:root/init.msm.rc \
 	$(LOCAL_PATH)/root/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
 	$(LOCAL_PATH)/root/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+	$(LOCAL_PATH)/root/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
 	$(LOCAL_PATH)/root/init.qcom.rc:root/init.qcom.rc \
 	$(LOCAL_PATH)/root/init.qcom.sh:root/init.qcom.sh \
+	$(LOCAL_PATH)/root/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
 	$(LOCAL_PATH)/root/init.target.rc:root/init.target.rc \
 	$(LOCAL_PATH)/root/ueventd.qcom.rc:root/ueventd.qcom.rc
-
 
 #scripts
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/scripts/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.coex.sh:system/etc/init.qcom.coex.sh \
+	$(LOCAL_PATH)/scripts/init.qcom.efs.sync.sh:system/etc/init.qcom.efs.sync.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh \
 	$(LOCAL_PATH)/scripts/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
@@ -252,29 +251,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072 \
     mpq.audio.decode=true
 
-#cne
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.UseCne=vendor \
-    persist.cne.UseSwim=false \
-    persist.cne.bat.range.low.med=30 \
-    persist.cne.bat.range.med.high=60 \
-    persist.cne.loc.policy.op=/system/etc/OperatorPolicy.xml \
-    persist.cne.loc.policy.user=/system/etc/UserPolicy.xml \
-    persist.cne.bwbased.rat.sel=false \
-    persist.cne.snsr.based.rat.mgt=false \
-    persist.cne.bat.based.rat.mgt=false \
-    persist.cne.rat.acq.time.out=30000 \
-    persist.cne.rat.acq.retry.tout=0 \
-    persist.cne.nsrm.mode=false
-
 #misc
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.fuse_sdcard=true \
-	ro.usb.mtp_usbnet=0x2e32 \
-	ro.usb.mtp_usbnet_adb=0x2e33 \
-	ro.usb.cdrom=0x2e20 \
-	ro.usb.ms=0x2e21 \
-	ro.usb.ms_adb=0x2e22 \
+	ro.usb.mtp=0x2e32 \
+	ro.usb.mtp_adb=0x2e33 \
 	ro.usb.ptp=0x2e30 \
 	ro.usb.ptp_adb=0x2e31 \
 	ro.hdmi.enable=true \
@@ -297,10 +278,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.ril.transmitpower=true \
 	persist.radio.apm_sim_not_pwdn=1 \
 	persist.radio.call_type=1 \
-	persist.audio.fluence.mode=endfire \
-	persist.audio.vr.enable=false \
-	ro.qc.sdk.audio.fluencetype=fluence \
-	persist.audio.handset.mic=digital \
 	ro.config.vc_call_vol_steps=7
 
 # Wifi

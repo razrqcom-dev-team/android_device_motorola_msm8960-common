@@ -34,6 +34,7 @@ TARGET_CPU_SMP := true
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_EXTRA_CFLAGS:= -mtune=cortex-a9 -mcpu=cortex-a9
 BOARD_USES_QCOM_HARDWARE := true
 
 # Krait optimizations
@@ -70,6 +71,14 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 # Inline kernel building
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8960-common
 TARGET_KERNEL_CONFIG := msm8960_mmi_defconfig
+#TARGET_PREBUILT_KERNEL := device/motorola/xt926/kernel
+
+# copy all kernel modules under the "kernel/modules" directory to system/lib/modules
+#PRODUCT_COPY_FILES += $(shell \
+#        find $(LOCAL_PATH)/kernel/modules -name '*.ko' 2> /dev/null \
+#        | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
+#        | tr '\n' ' ')
+
 #TARGET_KERNEL_SELINUX_CONFIG := msm8960_mmi_selinux_defconfig
 BOARD_KERNEL_CMDLINE := console=/dev/null androidboot.hardware=qcom user_debug=31 loglevel=1 msm_rtb.filter=0x3F kgsl.mmutype=gpummu zcache
 BOARD_KERNEL_BASE := 0x80200000
@@ -135,6 +144,7 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := false
 TARGET_OTA_ASSERT_DEVICE := xt925,xt926,xt907,vanquish_u,vanquish,scorpion_mini,mb886,qinara,asanti,asanti_c,xt897
 
 # Recovery
+#TARGET_NO_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_SUPPRESS_EMMC_WIPE := true
@@ -144,9 +154,11 @@ TARGET_USERIMAGES_USE_EXT4 := true
 #TWRP
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_NO_USB_STORAGE := true
-TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+#BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_INITRC := $(LOCAL_PATH)/init.recovery.rc
+TARGET_USERIMAGES_USE_EXT4 := true

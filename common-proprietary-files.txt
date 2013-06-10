@@ -61,9 +61,11 @@ lib/hw/sensors.msm8960.so
 lib/hw/sensors.oem.so
 
 #libs
+lib/libacdbloader.so
 lib/libAKM.so
 lib/libapnjni.so
 lib/libaudcal.so
+lib/libaudioalsa.so
 lib/libbabysit.so
 lib/libbson.so
 lib/libbt-aptx-4.0.4.so

@@ -258,7 +258,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.usb.mtp_adb=0x2e33 \
 	ro.usb.ptp=0x2e30 \
 	ro.usb.ptp_adb=0x2e31 \
-	ro.hdmi.enable=true
+	ro.hdmi.enable=true \
+        otaupdater.sdcard.os=sdcard \
+	otaupdater.sdcard.recovery=sdcard
 
 #wifi
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -281,6 +283,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=30
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

@@ -123,6 +123,7 @@ case "$target" in
          chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
          chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
          chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+         chown system.system /sys/module/msm_thermal/parameters/thermal_max_freq
          chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
          chown root.system /sys/devices/system/cpu/mfreq
          chmod 220 /sys/devices/system/cpu/mfreq

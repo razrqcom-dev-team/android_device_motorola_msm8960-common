@@ -100,3 +100,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=30
+
+# MSM8960 Parts
+PRODUCT_PACKAGES += \
+    MSM8960Parts

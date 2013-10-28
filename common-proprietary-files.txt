@@ -2,6 +2,7 @@
 bin/ap_gain.bin
 bin/ap_gain_mmul.bin
 bin/mpdecision
+bin/netmgrd
 bin/qdumpd
 bin/qmi_motext_hook
 bin/qmiproxy
@@ -10,9 +11,6 @@ bin/rmt_storage
 bin/sensors.qcom
 bin/thermald
 bin/whisperd
-
-# Configs
-etc/wifi/hostapd_default.conf
 
 # HAL
 lib/hw/vendor-camera.msm8960.so
@@ -49,6 +47,7 @@ lib/libmotext_inf.so
 lib/libmoto_netutil.so
 lib/libmotpostprocinterface.so
 lib/libnative_renderer.so
+lib/libnetmgr.so
 lib/libqcci_legacy.so
 lib/libqdi.so
 lib/libqdp.so
@@ -93,6 +92,30 @@ lib/libchromatix_s5k3l1yx_hfr_90fps.so
 lib/libchromatix_s5k3l1yx_preview.so
 lib/libchromatix_s5k3l1yx_video_hd.so
 lib/libchromatix_s5k3l1yx_zsl.so
+
+## Adreno GPU
+etc/firmware/a225p5_pm4.fw
+etc/firmware/a225_pfp.fw
+etc/firmware/a225_pm4.fw
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
+etc/firmware/leia_pfp_470.fw
+etc/firmware/leia_pm4_470.fw
+lib/egl/eglsubAndroid.so
+lib/egl/libEGL_adreno200.so
+lib/egl/libGLESv1_CM_adreno200.so
+lib/egl/libGLESv2_adreno200.so
+lib/egl/libGLESv2S3D_adreno200.so
+lib/egl/libq3dtools_adreno200.so
+lib/libc2d2_a3xx.so
+lib/libc2d2_z180.so
+lib/libC2D2.so
+lib/libgsl.so
+lib/libllvm-a3xx.so
+lib/libOpenCL.so
+lib/libOpenVG.so
+lib/libsc-a2xx.so
+lib/libsc-a3xx.so
 
 # ION audio support from HTC S4
 lib/libacdbloader.so

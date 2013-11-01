@@ -19,14 +19,6 @@
     <string name="external_storage_on">Using SD Card for apps and media</string>
     <string name="external_storage_off">Using internal storage for apps and media</string>
 
-    <string name="keyboard_layouts_label">Photon Q keypad</string>
-    <string name="keypad_asanti_qwerty_label">Asanti QWERTY</string>
-    <string name="keypad_asanti_qwertz_label">Asanti QWERTZ</string>
-    <string name="keypad_asanti_czech_qwerty_label">Asanti Czech QWERTY</string>
-    <string name="keypad_asanti_czech_qwertz_label">Asanti Czech QWERTZ</string>
-    <string name="keypad_asanti_cro_qwerty_label">Asanti Croatian QWERTY</string>
-    <string name="keypad_asanti_cro_qwertz_label">Asanti Croatian QWERTZ</string>
-
     <string name="reboot_prompt_title">Reboot required</string>
     <string name="reboot_prompt_message">In order to apply the changed configuration, a reboot is required.\n\nDo you want to reboot now?</string>
     <string name="yes">Yes</string>

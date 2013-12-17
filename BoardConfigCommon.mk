@@ -31,6 +31,7 @@ BOARD_VENDOR := motorola-msm8960
 
 # Platform
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+TARGET_QCOM_MEDIA_VARIANT := caf
 
 # Inline kernel building
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8960-common
@@ -40,8 +41,13 @@ BOARD_KERNEL_CMDLINE := console=/dev/null androidboot.hardware=qcom user_debug=3
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01600000
-#backwards compat for 4.1 (making recoveries)
-#BOARD_FORCE_RAMDISK_ADDRESS := 0x81600000
+
+WLAN_MODULES:
+	mkdir -p $(KERNEL_MODULES_OUT)/prima
+	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/prima/prima_wlan.ko
+	ln -sf /system/lib/modules/prima/prima_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+
+TARGET_KERNEL_MODULES += WLAN_MODULES
 
 # Telephony
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/MotorolaQualcommRIL.java

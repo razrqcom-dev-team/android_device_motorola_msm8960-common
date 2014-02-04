@@ -89,7 +89,8 @@ PRODUCT_COPY_FILES += \
 # Media config
 ifeq ($(TARGET_USES_MOTOROLA_MSM8960_COMMON_MEDIA_PROFILES),true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/config/media_profiles_xt9xx.xml:system/etc/media_profiles_xt9xx.xml
 endif
 
 # Media codecs

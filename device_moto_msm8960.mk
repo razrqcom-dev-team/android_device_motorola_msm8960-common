@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
@@ -18,7 +19,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 LOCAL_PATH := device/motorola/moto_msm8960
 
-## overlays
+# moto_msm8960 specific overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_LOCALES := en_US
@@ -27,6 +28,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
 # Audio
@@ -36,57 +38,73 @@ PRODUCT_PACKAGES += \
 
 # HAL
 PRODUCT_PACKAGES += \
-    camera.msm8960 \
     copybit.msm8960 \
     gps.msm8960 \
     gralloc.msm8960 \
     hwcomposer.msm8960 \
+    keystore.msm8960 \
     lights.MSM8960 \
     memtrack.msm8960 \
     nfc.msm8960 \
     power.msm8960
 
-# Motorola
+# WIFI
+PRODUCT_PACKAGES += wcnss_service
+
+# Symlinks
 PRODUCT_PACKAGES += \
-    batt_health \
-    charge_only_mode \
-    graphicsd \
-    mot_boot_mode
+    mbhc.bin \
+    wcd9310_anc.bin \
+    WCNSS_qcom_wlan_nv_calibration.bin \
+    WCNSS_qcom_wlan_nv_regulatory.bin
+
+# Utilities
+PRODUCT_PACKAGES += \
+    mkfs.f2fs \
+    fsck.f2fs \
+    fibmap.f2fs
 
 # Misc
 PRODUCT_PACKAGES += \
     DevicePerformanceSettingsHelper \
     sqlite3
-
-# Symlinks
-PRODUCT_PACKAGES += \
-    mbhc.bin \
-    wcd9310_anc.bin
-
-# GPS configuration
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf
-
 # EGL config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/egl.cfg:system/lib/egl/egl.cfg
 
+# GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf
+
+# Location security configuration file
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config/sec_config:system/etc/sec_config
+
 # Wifi
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wlan/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wlan/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
+    kernel/motorola/msm8960dt-common/drivers/staging/prima/firmware_bin/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    kernel/motorola/msm8960dt-common/drivers/staging/prima/firmware_bin/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wlan/cal_files/WCNSS_qcom_wlan_nv_calibration.bin:system/etc/firmware/wlan/prima/cal_files/WCNSS_qcom_wlan_nv_calibration.bin \
+    $(LOCAL_PATH)/wlan/cal_files/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/cal_files/WCNSS_qcom_wlan_nv_regulatory.bin
 
 # Ramdisk
 PRODUCT_PACKAGES += \
+    bbx \
+    f2fscheck.sh \
+    f2fs-fstab.qcom \
     fstab.qcom \
     init.qcom.rc \
+    init.recovery.qcom.rc \
     init.target.rc \
     ueventd.qcom.rc
 
 # Init scripts
 PRODUCT_PACKAGES += \
+    init.mmi.boot.sh \
+    init.mmi.touch.sh \
     init.qcom.post_boot.sh \
-    init.qcom.sh
+    init.qcom.sh \
+    init.qcom.wifi.sh
 
 # Ramdisk overrides
 PRODUCT_COPY_FILES += \
@@ -102,13 +120,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
     $(LOCAL_PATH)/config/snd_soc_msm_2x_xt92x:system/etc/snd_soc_msm/snd_soc_msm_2x_xt92x
 
+# Charger mode setup
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/moto_com.sh:system/bin/moto_com.sh
+
 # Media config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/config/media_profiles_xt90x.xml:system/etc/media_profiles_xt90x.xml
-
-# Media codecs
-PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config/media_profiles_xt90x.xml:system/etc/media_profiles_xt90x.xml \
     $(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml
 
 # XT90x recovery
@@ -123,6 +142,10 @@ PRODUCT_COPY_FILES += \
 # Alternate optional key maps
 PRODUCT_PACKAGES += \
     AsantiKeypad
+
+# QCOM Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    hw.trueMirrorSupported=1
 
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -157,11 +180,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.fuse_sdcard=true \
     ro.qc.sdk.audio.fluencetype=fluence
-
-# Wifi
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=30
 
 $(call inherit-product, device/motorola/qcom-common/qcom-common.mk)
 $(call inherit-product, device/motorola/qcom-common/idc/idc.mk)

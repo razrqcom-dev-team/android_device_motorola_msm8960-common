@@ -76,9 +76,6 @@ BOARD_RIL_NO_CELLINFOLIST := true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 BOARD_USES_MOTOROLA_EMU_AUDIO := true
 
-# Charger
-BOARD_CHARGER_RES := device/motorola/msm8960-common/charger
-
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 

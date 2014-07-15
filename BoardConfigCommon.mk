@@ -22,7 +22,7 @@
 #
 
 # inherit from the proprietary version
--include vendor/motorola/moto_msm8960/BoardConfigVendor.mk
+-include vendor/motorola/msm8960-common/BoardConfigVendor.mk
 
 BOARD_VENDOR := motorola-qcom
 
@@ -34,14 +34,14 @@ TARGET_CPU_VARIANT := krait
 
 -include device/motorola/qcom-common/BoardConfigCommon.mk
 
-LOCAL_PATH := device/motorola/moto_msm8960
+LOCAL_PATH := device/motorola/msm8960-common
 
 TARGET_SPECIFIC_HEADER_PATH += $(LOCAL_PATH)/include
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
 TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_LIBINIT_DEFINES_FILE := device/motorola/moto_msm8960/init/init_moto_msm8960.c
+TARGET_LIBINIT_DEFINES_FILE := device/motorola/msm8960-common/init/init_moto_msm8960.c
 
 TARGET_QCOM_MEDIA_VARIANT := caf
 TARGET_USES_WCNSS_CTRL := true
@@ -49,10 +49,9 @@ TARGET_USES_WCNSS_CTRL := true
 # Inline kernel building
 TARGET_KERNEL_SOURCE := kernel/motorola/msm8960dt-common
 TARGET_KERNEL_CONFIG := msm8960_mmi_defconfig
-TARGET_KERNEL_VARIANT_CONFIG := msm8960_mmi_xt897_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := msm8960_mmi_selinux_defconfig
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 maxcpus=2 vmalloc=400M androidboot.write_protect=0 zcache androidboot.selinux=permissive androidboot.modelno=XT897 product=asanti_c androidboot.device=asanti_c androidboot.secure_hardware=1
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 maxcpus=2 vmalloc=400M androidboot.write_protect=0 zcache androidboot.selinux=permissive androidboot.secure_hardware=1
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02200000
@@ -78,7 +77,7 @@ BOARD_USES_LEGACY_ALSA_AUDIO := true
 BOARD_USES_MOTOROLA_EMU_AUDIO := true
 
 # Charger
-BOARD_CHARGER_RES := device/motorola/moto_msm8960/charger
+BOARD_CHARGER_RES := device/motorola/msm8960-common/charger
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
@@ -95,7 +94,7 @@ BOARD_EGL_CFG := $(LOCAL_PATH)/config/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DUSE_COPYBIT_COMPOSITION_FALLBACK
 
 # Custom relese tools for unified devices
-TARGET_RELEASETOOLS_EXTENSIONS := device/motorola/moto_msm8960
+TARGET_RELEASETOOLS_EXTENSIONS := device/motorola/msm8960-common
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := moto_msm8960,xt901,solstice,xt905,smq_u,scorpion_mini_u,xt907,scorpion_mini,xt925,vanquish_u,xt926,vanquish,mb886,qinara,xt897,asanti,xt897c,asanti_c

@@ -450,18 +450,18 @@ void loc_eng_cleanup(loc_eng_data_s_type &loc_eng_data)
 
     loc_eng_set_engine_lock(loc_eng_data, 0);
 
-#if 0 // can't afford to actually clean up, for many reason.
+//#if 0 // can't afford to actually clean up, for many reason.
 
     ((LocEngContext*)(loc_eng_data.context))->drop();
     loc_eng_data.context = NULL;
 
     // De-initialize ulp
-    if (locEngUlpInf != NULL)
+/*    if (locEngUlpInf != NULL)
     {
         locEngUlpInf = NULL;
         msg_q_destroy( &loc_eng_data.ulp_q);
     }
-
+*/
     if (loc_eng_data.client_handle != NULL)
     {
         LOC_LOGD("loc_eng_init: client opened. close it now.");
@@ -481,7 +481,7 @@ void loc_eng_cleanup(loc_eng_data_s_type &loc_eng_data)
     }
 #endif /* FEATURE_GNSS_BIT_API */
 
-#endif
+//#endif
 
     EXIT_LOG(%s, VOID_RET);
 }

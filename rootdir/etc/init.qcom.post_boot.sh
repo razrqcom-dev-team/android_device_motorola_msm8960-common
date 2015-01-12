@@ -396,7 +396,7 @@ if grep ctrl_interface=wlan0 /data/misc/wifi/p2p_supplicant.conf > /dev/null; th
     rm -f /data/misc/wifi/p2p_supplicant.conf
 fi
 
-# moto_msm8960 specific settings
+# moto msm8960-common specific settings
 case "$target" in
      "msm8960")
         # Eliminate speaker pop after lineout PA enable - set delay to 32ms

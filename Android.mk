@@ -21,7 +21,7 @@
 
 ifeq ($(BOARD_VENDOR),motorola-qcom)
 ifeq ($(TARGET_BOARD_PLATFORM),msm8960)
-ifeq ($(TARGET_DEVICE),moto_msm8960)
+ifneq ($(filter xt907 xt925 xt926,$(TARGET_DEVICE)),)
 
 LOCAL_PATH := $(call my-dir)
 

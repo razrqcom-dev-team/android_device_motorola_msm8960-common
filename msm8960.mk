@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2015 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,13 +18,10 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-LOCAL_PATH := device/motorola/moto_msm8960
+LOCAL_PATH := device/motorola/msm8960-common
 
-# moto_msm8960 specific overlay
+# msm8960-common specific overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
-# To build cm recovery this must be set to get proper recovery resources
-#PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -109,7 +106,6 @@ PRODUCT_PACKAGES += \
     init.qcom.wifi.sh
 
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-$(warning "USING F2FS for userdata")
 
 # This ensures the needed build tools are available.
 # TODO: make non-linux builds happy with external/f2fs-tool; system/extras/f2fs_utils
@@ -123,9 +119,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/config/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
-    $(LOCAL_PATH)/config/snd_soc_msm_2x_xt92x:system/etc/snd_soc_msm/snd_soc_msm_2x_xt92x
+    $(LOCAL_PATH)/config/audio_policy.conf:system/etc/audio_policy.conf
 
 # Charger mode setup
 PRODUCT_COPY_FILES += \
@@ -133,14 +127,7 @@ PRODUCT_COPY_FILES += \
 
 # Media config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/config/media_profiles_xt90x.xml:system/etc/media_profiles_xt90x.xml \
     $(LOCAL_PATH)/config/media_codecs_aosp.xml:system/etc/media_codecs.xml
-
-# XT90x recovery
-PRODUCT_COPY_FILES += \
-    device/motorola/qcom-common/idc/atmxt-i2c.idc:root/vendor/firmware/atmxt-i2c.idc \
-    vendor/motorola/moto_msm8960/proprietary/etc/firmware/atmxt-r2.tdat:root/vendor/firmware/atmxt-r2.tdat
 
 # QCOM Display
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -175,18 +162,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.fuse_sdcard=true \
     ro.crypto.fuse_sdcard=true \
     ro.qc.sdk.audio.fluencetype=fluence \
-    ro.hdmi.enable=true \
-    ro.cwm.forbid_format="/fsg,/firmware,/persist,/modem,/boot"
+    ro.hdmi.enable=true
 
 # Opengles version 2
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
-# LTE, CDMA, GSM/WCDMA
+# Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=10 \
-    telephony.lteOnCdmaDevice=1 \
-    persist.radio.mode_pref_nv10=1 \
     persist.radio.no_wait_for_card=1 \
     persist.radio.dfr_mode_set=1 \
     persist.rmnet.mux=disabled \
@@ -195,6 +178,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.timed.enable=true
 
+# Force old camera api
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
@@ -203,4 +187,4 @@ $(call inherit-product, device/motorola/qcom-common/idc/idc.mk)
 $(call inherit-product, device/motorola/qcom-common/keychars/keychars.mk)
 $(call inherit-product, device/motorola/qcom-common/keylayout/keylayout.mk)
 $(call inherit-product, device/motorola/qcom-common/modules/nfc/nfc.mk)
-$(call inherit-product, vendor/motorola/moto_msm8960/moto_msm8960-vendor.mk)
+$(call inherit-product, vendor/motorola/msm8960-common/msm8960-common-vendor.mk)

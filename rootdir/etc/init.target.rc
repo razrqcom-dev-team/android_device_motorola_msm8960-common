@@ -627,10 +627,6 @@ service mmi-touch-sh /system/bin/init.mmi.touch.sh
 on boot
     start thermald
 
-on property:installd.post_fs_data_ready=1
-    # Migration script for sdcard emulation in the kernel
-    exec /system/bin/refuse
-
 # Disable BAM Adaptive Timer when Tethering is on.
 on property:net.tethering.on=1
    write /sys/module/bam_dmux/parameters/adaptive_timer_enabled 0

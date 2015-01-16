@@ -176,7 +176,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.eons.enabled=1 \
     persist.radio.call_type=1 \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.timed.enable=true
+    persist.timed.enable=true \
+    ro.telephony.ril_class=MotorolaQualcommRIL
 
 # Force old camera api
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

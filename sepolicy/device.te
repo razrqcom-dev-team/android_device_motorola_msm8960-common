@@ -4,6 +4,7 @@ type atvc_core_device, dev_type;
 # Motorola partitions
 type cid_block_device, dev_type;
 type hob_block_device, dev_type;
+type modemst_block_device, dev_type;
 type utags_block_device, dev_type;
 
 # qdumpd

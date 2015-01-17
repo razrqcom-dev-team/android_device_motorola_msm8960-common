@@ -97,30 +97,15 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += \
     device/motorola/msm8960-common/sepolicy
 
+# Device specific additions
 BOARD_SEPOLICY_UNION += \
     atvc.te \
     atvc_core.te \
     batt_health.te \
     bootmodem.te \
-    device.te \
-    file.te \
-    file_contexts \
     hw_revs.te \
-    keystore.te \
-    location.te \
     mmi-boot-sh.te \
     mmi-touch-sh.te \
-    mm-pp-daemon.te \
-    mm-qcamerad.te \
-    mpdecision.te \
-    netd.te \
     platform_app.te \
-    property_contexts \
-    property.te \
     qdumpd.te \
-    rmt_storage.te \
-    sensors.te \
-    surfaceflinger.te \
-    thermal-engine.te \
-    ueventd.te \
     whisperd.te

@@ -91,6 +91,7 @@ TARGET_RECOVERY_FSTYPE_MOUNT_OPTIONS := ext4=max_batch_time=0,commit=1,data=orde
 BOARD_USES_LEGACY_MMAP := true
 
 # TWRP
+TW_INCLUDE_L_CRYPTO := true
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 

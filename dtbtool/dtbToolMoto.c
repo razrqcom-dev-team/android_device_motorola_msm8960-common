@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
-const char* input_dtb[256];
-const char* output_image;
-int no_dtbs;
 
 /* Maximum padding, 4 bytes for "no DT at the end" */
 const char padding[] = { 0, 0, 0, 0 };
@@ -51,8 +47,9 @@ size_t copy_file(FILE* in, FILE* out)
 
 int main(int argc, char** argv)
 {
-	int i;
-	int next_is_output = 0;
+	int i, no_dtbs = 0, next_is_output = 0;
+	const char* output_image = NULL;
+	const char* input_dtb[256];
 
 	/* Check arguments */
 	for (i = 1; i < argc && no_dtbs < 256; i++)
@@ -82,7 +79,7 @@ int main(int argc, char** argv)
 	}
 
 	/* Check valitidy */
-	if (no_dtbs < 1)
+	if (!no_dtbs || !output_image)
 	{
 		print_usage();
 		return 1;
